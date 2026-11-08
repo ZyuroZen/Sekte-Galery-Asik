@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sekte Galery Asik — Komunitas Kreator Editor</title>
+<style>
+:root{--bg:linear-gradient(160deg,#fff 0%,#e4eeff 50%,#9cc1ff 100%);--bgc:#e4eeff;--text:#07101f;--muted:#4a5a78;--card:rgba(255,255,255,.72);--line:rgba(20,60,140,.2);--accent:#1f5eff;--accent2:#0a2a8a;--nav:rgba(255,255,255,.85);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(160deg,#000 0%,#06122e 50%,#0b3bb8 100%);--bgc:#06122e;--text:#fff;--muted:#a9b9dc;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.15);--accent:#4d9bff;--accent2:#fff;--nav:rgba(0,0,0,.75)}}
+:root[data-theme="dark"]{--bg:linear-gradient(160deg,#000 0%,#06122e 50%,#0b3bb8 100%);--bgc:#06122e;--text:#fff;--muted:#a9b9dc;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.15);--accent:#4d9bff;--accent2:#fff;--nav:rgba(0,0,0,.75)}
+html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);background-color:var(--bgc);background-attachment:fixed;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;padding-bottom:104px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);z-index:30}
+.w{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--nav);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:20}
+.top .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{font-weight:800;letter-spacing:.5px}.logo span{color:var(--accent)}
+.links{display:none;gap:24px;align-items:center}
+.links a{color:var(--muted);text-decoration:none;font-size:15px}
+.links a.cta{background:var(--accent);color:#fff;padding:8px 18px;border-radius:999px;font-weight:700}
+.tabbar{display:flex;gap:2px;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(92vw,420px);padding:6px;border-radius:999px;background:var(--nav);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2);z-index:25}
+.tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;border-radius:999px;font-size:11px;color:var(--muted);text-decoration:none;transition:background .25s,color .25s,transform .2s}
+.tabbar a{-webkit-tap-highlight-color:transparent;outline:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.tabbar a:focus,.tabbar a:focus-visible{outline:none}
+.tabbar a.on{background:rgba(77,155,255,.22);color:var(--text)}
+.tabbar a:active{transform:scale(1.14);background:rgba(77,155,255,.34)}
+.tabbar svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#st{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header.hero,main,footer{position:relative;z-index:1}
+.m,.box,.step,.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(8px)}
+.hero{padding:clamp(28px,6vw,88px) 0 clamp(24px,4vw,56px)}
+.hero-in{display:grid;gap:24px;text-align:center}
+.hero h1{font-size:clamp(28px,6vw,60px);line-height:1.12;margin:0 0 14px}
+.hero h1 b{background:linear-gradient(90deg,var(--accent2),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:560px;margin:0 auto 22px;font-size:clamp(15px,2vw,18px)}
+.btn{display:inline-block;background:linear-gradient(90deg,#1f5eff,#4d9bff);color:#fff;border:0;padding:13px 26px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{padding:16px 6px;text-align:center}
+.stat b{display:block;font-size:clamp(22px,4vw,34px);color:var(--accent)}
+.stat small{color:var(--muted)}
+section{margin-bottom:clamp(36px,6vw,64px)}
+h2{font-size:clamp(20px,3vw,30px);margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 18px}
+.hs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px}
+.hs .m{flex:0 0 132px;scroll-snap-align:start}
+.gg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.m{padding:16px;text-align:center;cursor:pointer}
+.av{position:relative;overflow:hidden;width:56px;height:56px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;font-weight:800;color:#061230;background:linear-gradient(135deg,#fff,#4d9bff)}
+.m b{display:block;font-size:15px}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.av.big{width:72px;height:72px;margin:0 0 10px;font-size:24px}
+#selav .av{margin:0;flex:none}.m small{color:var(--muted)}
+.split,.cols{display:grid;gap:16px}
+.steps{display:grid;gap:10px}
+.step{padding:16px}
+.step i{font-style:normal;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;margin-right:8px}
+.step p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:999px;font-size:13px}
+.box{padding:22px}
+.sel{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+footer{border-top:1px solid var(--line);padding:24px 0;text-align:center;color:var(--muted);font-size:13px}
+footer a{color:var(--accent)}
+#ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;align-items:flex-end;justify-content:center}
+#ov.on{display:flex}
+#ovb{width:100%;max-width:520px;border-radius:20px 20px 0 0;max-height:85%;overflow:auto;background:var(--bgc);padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row span{color:var(--muted)}.row b{text-align:right;min-width:0;overflow-wrap:anywhere}
+.badge{display:inline-block;font-size:11px;padding:2px 10px;border-radius:999px;background:var(--accent);color:#fff;margin-top:4px}
+.x{float:right;background:none;border:0;color:var(--muted);font-size:26px;line-height:1;cursor:pointer}
+@media (min-width:640px){body{padding-bottom:0}.tabbar{display:none}.links{display:flex}.hs{display:grid;overflow:visible;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.hs .m{flex:none}#ov{align-items:center}#ovb{border-radius:20px;padding-bottom:22px}.steps{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:768px){.split{grid-template-columns:1fr 1fr;align-items:start}}
+@media (min-width:1024px){.hero-in{grid-template-columns:1.3fr 1fr;align-items:center;gap:56px;text-align:left}.hero p{margin-left:0}.stats{grid-template-columns:1fr}.stat{display:flex;justify-content:space-between;align-items:center;padding:18px 24px}.cols{grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}.steps{grid-template-columns:1fr}.formc{position:sticky;top:84px}.hs{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
+@media (hover:hover){.m{transition:transform .15s,border-color .15s}.m:hover{transform:translateY(-3px);border-color:var(--accent)}}
+</style>
+</head>
+<body>
+<canvas id="st" aria-hidden="true"></canvas>
+<nav class="top"><div class="w"><div class="logo">SEKTE <span>GALERY ASIK</span></div><div class="links"><a href="#pengurus">Pengurus</a><a href="#anggota">Anggota</a><a href="#syarat">Seleksi</a><a class="cta" href="#join">Gabung</a></div></div></nav>
+<nav class="tabbar"><a href="#top" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>Beranda</a><a href="#pengurus"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Pengurus</a><a href="#anggota"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c3 .2 5 2.3 5 5.5"/></svg>Anggota</a><a href="#join"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.5"/><path d="M3 20c0-3.6 3-6 7-6"/><path d="M18 12v6M15 15h6"/></svg>Gabung</a></nav>
+
+<header class="hero"><div class="w hero-in">
+<div><h1>Berkarya, tumbuh, dan <b>bersinar bersama</b></h1>
+<p>Komunitas kreator editor Indonesia. Temukan teman sesama editor video, pembuat preset, dan kreator AMV.</p>
+<a class="btn" href="#join">Gabung Sekarang</a></div>
+<div class="stats"><div class="stat"><b id="total">–</b><small>Anggota</small></div><div class="stat"><b>2</b><small>Generasi</small></div><div class="stat"><b>8</b><small>Grup</small></div></div>
+</div></header>
+
+<main class="w">
+<section id="pengurus"><h2>Pengurus</h2><p class="sub">Owner, founder, dan admin. Ketuk untuk melihat info.</p><div class="hs" id="staff"></div></section>
+
+<section id="anggota"><h2>Anggota per Generasi</h2><p class="sub">Ketuk generasi untuk melihat infonya.</p>
+<div class="split"><div class="gg" id="grid"></div>
+<div class="box sel"><div style="display:flex;align-items:center;gap:12px"><span id="selav"></span><div><b>Grup Seleksi Gen 2</b><br><small style="color:var(--muted)">Coming soon · 35 anggota</small></div></div><a class="btn" href="https://chat.whatsapp.com/FNuwJkUuoDX1oM6BQtfr04?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Masuk grup seleksi</a></div></div></section>
+
+<div class="cols">
+<div>
+<section><h2>Cara Bergabung</h2><p class="sub">Tiga langkah singkat.</p>
+<div class="steps">
+<div class="step"><i>1</i><b>Masuk grup seleksi</b><p>Isi formulir, lalu masuk ke grup seleksi.</p></div>
+<div class="step"><i>2</i><b>Kirim video + timeline</b><p>Sistem Easy-Med ACC. Yang malas bisa kirim video atau foto beserta timeline ke admin.</p></div>
+<div class="step"><i>3</i><b>Hasil seleksi</b><p>Sistem seleksi yang dipakai: Acc, Dec, Reap 2x.</p></div>
+</div></section>
+<section id="syarat"><h2>Syarat Seleksi</h2><p class="sub">Seleksi Gen 2 segera dibuka (coming soon). Hashtag: #seleksigasik</p>
+<div class="chips"><span>Usia 14+</span><span>Good attitude</span><span>No drama</span><span>Siap CN</span><span>No DB</span><span>No rasis</span><span>Paham basic edit</span><span>All style: JJ, typography, AMV, design, mograph, dll</span><span>Sound bebas</span><span>Pengguna user bebas</span></div></section>
+</div>
+<section class="formc" id="join"><h2>Formulir Pendaftaran</h2><p class="sub">Isi data singkat, lalu kamu diarahkan ke grup seleksi.</p>
+<div class="box">
+<label for="nama">Nama / nickname</label><input id="nama" placeholder="Contoh: Zyuro">
+<label for="sosmed">Akun sosial media</label><input id="sosmed" placeholder="@username TikTok / IG">
+<label for="jenis">Jenis konten</label><select id="jenis"><option>Edit AMV</option><option>Preset Alight Motion</option><option>Edit video lainnya</option><option>Lainnya</option></select>
+<label for="alasan">Kenapa ingin bergabung?</label><textarea id="alasan" rows="3"></textarea>
+<p style="margin:16px 0 0"><button class="btn" id="kirim" type="button">Kirim Pendaftaran</button></p>
+<p class="note" id="info">Datamu disalin otomatis, tinggal tempel di grup seleksi.</p>
+</div></section>
+</div>
+</main>
+
+<div id="ov"><div class="box" id="ovb"></div></div>
+<footer><div class="w">© 2026 Sekte Galery Asik · Komunitas kreator editor · TikTok <a href="https://www.tiktok.com/@sektegasik" target="_blank" rel="noopener">@sektegasik</a></div></footer>
+
+<script>
+var LINK_SELEKSI="https://chat.whatsapp.com/FNuwJkUuoDX1oM6BQtfr04?s=cl&p=a&iam=2";
+// Jumlah anggota (per 8 Nov 2026). Ubah manual jika berubah.
+var gens=[
+{n:"Gen 1",j:48,dibuat:"27-10-2024",owner:"Zyuro",founder:["Yuri","Mive","Tian","Fuji"],admin:["Sellyn","Yuki","HRN","Lisa"]},
+{n:"Gen 2",j:17,dibuat:"17-6-2026",owner:"Zyuro",founder:["Yuri","Mive","Tian"],admin:["Lisa","HRN","Shadtz"]}
+];
+// Isi nama Founder (n:"") supaya tampil. Admin bisa ditambah.
+var staff=[
+{n:"Zyuro",r:"Owner",info:[["Peran","Owner Sekte Galery Asik"],["Konten","Preset Alight Motion"],["Tag","@zyuroprst"],["Tentang","Owner Ke 2 Yang Sebelumnya Dipegang Oleh Fuji"]]},
+{n:"Fuji",r:"Founder",info:[["Peran","Founder Sekte Galery Asik"],["Konten","Preset Alight Motion"],["Tag","@fujiprst"],["Tentang","Founder Marga Sekaligus Owner Pertama"]]},
+{n:"Mive",r:"Founder",info:[["Peran","Founder Sekte Galery Asik"],["Konten","Preset Alight Motion & Anime"],["Tag","@mive"],["Tentang","Founder Marga Sekaligus Manager Gen 1"]]},
+{n:"Yuri",r:"Founder",info:[["Peran","Founder Sekte Galery Asik"],["Konten","Preset Alight Motion"],["Tag","@yuriprst"],["Tentang","Founder Marga"]]},
+{n:"Tian",r:"Founder",info:[["Peran","Founder Sekte Galery Asik"],["Konten","Preset Alight Motion & Donghua"],["Tag","@tian"],["Tentang","Founder Marga"]]},
+{n:"Chiko",r:"Manager Gen 1",info:[["Peran","Manager Gen 1"],["Grup","Gen 1"],["Konten","Preset Alight Motion"],["Tag","@yuki"],["Tentang","Manager Di Gen 1"]]},
+{n:"Sellyn",r:"Manager Gen 1",info:[["Peran","Manager Gen 1"],["Grup","Gen 1"],["Konten","Preset Alight Motion"],["Tag","@sellyn"],["Tentang","Manager Di Gen 1"]]},
+{n:"HRN",r:"Manager Gen 2",info:[["Peran","Admin Gen 1, Manager Gen 2"],["Grup","Gen 1, Gen 2"],["Konten","Preset Alight Motion"],["Tag","@harun"],["Tentang","Admin Gen 1 Sekaligus Manager Gen 2"]]},
+{n:"Lisa",r:"Manager Gen 2",info:[["Peran","Admin Gen 1, Manager Gen 2"],["Grup","Gen 1, Gen 2"],["Konten","Preset Alight Motion"],["Tag","@lisa"],["Tentang","Admin Gen 1 Sekaligus Manager Gen 2"]]},
+{n:"Shadtz",r:"Manager Gen 2",info:[["Peran","Admin Gen 1, Manager Gen 2"],["Grup","Gen 1, Gen 2"],["Konten","The Spike Volleyball"],["Tag","@shadtz"],["Tentang","Admin Gen 1 Sekaligus Manager Gen 2"]]}
+];
+var ov=document.getElementById("ov"),ovb=document.getElementById("ovb");
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+// Link foto profil: isi link gambar (https://...) di dalam tanda kutip. Kosong = tampil huruf awal.
+var FOTO={"Zyuro":"","Fuji":"","Mive":"","Yuri":"","Tian":"","Chiko":"","Sellyn":"","HRN":"","Lisa":"","Shadtz":"","Gen 1":"","Gen 2":"","Seleksi":""};
+function avaHtml(nama,huruf,cls){var u=FOTO[nama];return '<div class="av'+(cls?' '+cls:'')+'">'+esc(huruf)+(u?'<img src="'+esc(u).replace(/"/g,"&quot;")+'" alt="" referrerpolicy="no-referrer" onerror="this.remove()">':'')+'</div>'}
+function openInfo(judul,badge,rows){
+ var h='<button class="x" type="button" onclick="closeInfo()" aria-label="Tutup">×</button>'+avaHtml(judul,judul[0],"big")+'<h2 style="margin:0">'+esc(judul)+'</h2><span class="badge">'+esc(badge)+'</span><div style="margin-top:12px">';
+ rows.forEach(function(r){h+='<div class="row"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>'});
+ ovb.innerHTML=h+'</div>';ov.classList.add("on");
+}
+function closeInfo(){ov.classList.remove("on")}
+ov.onclick=function(e){if(e.target===ov)closeInfo()};
+function kartu(box,ava,judul,kecil,fn){
+ var d=document.createElement("div");d.className="m";d.setAttribute("role","button");
+ d.innerHTML=avaHtml(judul,ava)+'<b>'+esc(judul)+'</b><small>'+esc(kecil)+'</small>';
+ d.onclick=fn;document.getElementById(box).appendChild(d);
+}
+var total=0;
+gens.forEach(function(g){
+ total+=g.j;
+ kartu("grid",g.n.slice(-1),g.n,g.j+" anggota",function(){openInfo(g.n,"Info grup",[["Jumlah anggota",g.j],["Dibuat",g.dibuat],["Owner",g.owner],["Founder",[].concat(g.founder).join(", ")],["Admin",g.admin.join(", ")]])});
+});
+document.getElementById("total").textContent=total;
+document.getElementById("selav").innerHTML=avaHtml("Seleksi","S");
+staff.filter(function(s){return s.n}).forEach(function(s){
+ kartu("staff",s.n[0],s.n,s.r,function(){openInfo(s.n,s.r,s.info)});
+});
+document.getElementById("kirim").onclick=function(){
+ var n=document.getElementById("nama").value.trim(),s=document.getElementById("sosmed").value.trim();
+ if(!n||!s){document.getElementById("info").textContent="Nama dan akun sosial wajib diisi.";return}
+ var t="Halo admin, saya ingin bergabung.\nNama: "+n+"\nSosmed: "+s+"\nKonten: "+document.getElementById("jenis").value+"\nAlasan: "+document.getElementById("alasan").value;
+ try{navigator.clipboard.writeText(t)}catch(e){}
+ document.getElementById("info").textContent="Data disalin. Tempel di grup seleksi.";
+ window.open(LINK_SELEKSI,"_blank");
+};
+var tabs=[].slice.call(document.querySelectorAll(".tabbar a")),tk=false;
+function act(){tk=false;var y=innerHeight*.4,cur=tabs[0];
+ tabs.forEach(function(a){var id=a.getAttribute("href").slice(1),e=id==="top"?null:document.getElementById(id);if(e&&e.getBoundingClientRect().top<=y)cur=a});
+ if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=tabs[tabs.length-1];
+ tabs.forEach(function(a){a.classList.toggle("on",a===cur)})}
+addEventListener("scroll",function(){if(!tk){tk=true;requestAnimationFrame(act)}},{passive:true});act();
+// Bintang bergerak di latar belakang
+(function(){
+ var c=document.getElementById("st"),x=c.getContext("2d"),S=[],W,H,col="#fff",t=0,sh=null,calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ function setCol(){col=getComputedStyle(document.documentElement).getPropertyValue("--accent2").trim()||"#fff"}
+ function size(){var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
+  var n=Math.min(130,Math.round(W*H/9000));S=[];
+  for(var i=0;i<n;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,v:Math.random()*.25+.05,p:Math.random()*6.28,s:Math.random()*.02+.005})}
+ function frame(){
+  t++;if(t%90===1)setCol();
+  x.clearRect(0,0,W,H);x.fillStyle=col;
+  for(var i=0;i<S.length;i++){var s=S[i];
+   if(!calm){s.y+=s.v;s.x-=s.v*.4;s.p+=s.s;if(s.y>H+2){s.y=-2;s.x=Math.random()*W}if(s.x<-2)s.x=W+2}
+   x.globalAlpha=.3+.7*Math.abs(Math.sin(s.p));
+   x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill()}
+  if(!calm){
+   if(!sh&&Math.random()<.004)sh={x:W*.2+Math.random()*W*.8,y:Math.random()*H*.4,l:0};
+   if(sh){sh.x-=9;sh.y+=5;sh.l++;
+    var g=x.createLinearGradient(sh.x,sh.y,sh.x+60,sh.y-33);g.addColorStop(0,col);g.addColorStop(1,"rgba(255,255,255,0)");
+    x.globalAlpha=Math.max(0,1-sh.l/40);x.strokeStyle=g;x.lineWidth=1.6;x.beginPath();x.moveTo(sh.x,sh.y);x.lineTo(sh.x+60,sh.y-33);x.stroke();
+    if(sh.l>40)sh=null}
+   requestAnimationFrame(frame)}
+ }
+ size();setCol();frame();
+ addEventListener("resize",function(){size();if(calm)frame()});
+})();
+</script>
+</body>
+</html>
